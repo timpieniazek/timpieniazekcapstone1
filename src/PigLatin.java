@@ -22,16 +22,13 @@ public class PigLatin {
 			System.out.print("Enter a line to be translated: ");
 			userInput = scan.nextLine();
 
-			int firstVowelIndex = indexOfFirstVowel(userInput);
-			System.out.println(firstVowelIndex);
+			int index = indexOfFirstVowel(userInput);
+			System.out.printf("%nIndex of first vowel: %s%n", index);
 			
+//			System.out.printf("%nPig Latin Translation: %s%n", translate(userInput, index));
 			
-			
-			System.out.printf("%s%s%s%n", userInput.substring(firstVowelIndex),
-					userInput.substring(0, firstVowelIndex), AY);
-			
-			System.out.print("Would you like to continue (y/n)?");
-			cont = scan.nextLine();
+//			System.out.printf("%nWould you like to continue (y/n)? ");
+//			cont = scan.nextLine();
 
 		}
 
@@ -39,8 +36,14 @@ public class PigLatin {
 
 	// Method takes a valid word and returns the index of the first vowel,
 	// returns -1 if no vowel.
+	
+	/* TODO:
+	 * method not working for words like "totally"
+	 * need to nest a for-loop to cycle through char index in words
+	 */
+	
 	public static int indexOfFirstVowel(String userInput) {
-		int index;
+		int index = -1;
 		for (int i = 0; i < VOWELS.length; i++) {
 			index = userInput.indexOf(VOWELS[i]);
 			if (index >= 0) {
@@ -49,5 +52,16 @@ public class PigLatin {
 		}
 		return 0;
 
+	}
+	
+	// Method takes a valid word and index of first vowel,
+	// returns Pig Latin translation.
+	public static String translate(String userInput, int index) {
+		String suffix = AY;
+		if (index == 0) {
+			suffix = "w" + AY;
+		}
+		
+		return userInput.substring(index) +	userInput.substring(0, index)+ suffix;
 	}
 }
