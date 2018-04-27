@@ -28,15 +28,24 @@ public class PigLatin {
 
 			// Converts to lowercase as per the Build Specs
 			userInput = userInput.toLowerCase();
-
-			System.out.println("Ends in punctuation? " + hasPunctuation(userInput));
-			if (hasPunctuation(userInput)) {
-				System.out.println("Remove punctuation: " + removePunctuation(userInput));
-				System.out.println("trans: " + translate(removePunctuation(userInput)) + userInput.substring(removePunctuation(userInput).length()));
-				System.out.println("Don't translate: " + dontTranslate(removePunctuation(userInput)));
+			
+			String[] words = userInput.split(" ");
+			
+			for (String word : words) {
+				System.out.print(translate(removePunctuation(word)) + word.substring(removePunctuation(word).length()) + " ");
 			}
+//				System.out.println("Ends in punctuation? " + hasPunctuation(word));
+//				if (hasPunctuation(word)) {
+//					System.out.println("Remove punctuation: " + removePunctuation(word));
+//					System.out.println("trans: " + translate(removePunctuation(word)) + word.substring(removePunctuation(word).length()));
+//					System.out.println("Don't translate: " + dontTranslate(removePunctuation(word)));
+//				}
+//				
+//				System.out.printf("%nPig Latin Translation: %s", translate(word));
+//				
+			
+			
 
-			System.out.printf("%nPig Latin Translation: %s%n", translate(userInput));
 
 			System.out.printf("%nWould you like to continue (y/n)? ");
 			cont = scan.nextLine();
@@ -117,6 +126,7 @@ public class PigLatin {
 	// Method takes a valid word and index of first vowel,
 	// returns Pig Latin translation.
 	public static String translate(String userInput) {
+		if (dontTranslate(userInput)) return userInput;
 		String suffix = AY;
 		int index = indexOfBreakpoint(userInput);
 		if (index == 0 && startsWithVowel(userInput)) {
