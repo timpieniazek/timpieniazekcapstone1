@@ -16,13 +16,22 @@ public class PigLatin {
 		String userInput;
 
 		// While loops allows user to repeat after translating line
-		char cont = 'y';
-		while (cont == 'y') {
+		String cont = "y";
+		while (cont.equalsIgnoreCase("y")) {
 
 			System.out.print("Enter a line to be translated: ");
 			userInput = scan.nextLine();
 
-			System.out.println(indexOfFirstVowel(userInput));
+			int firstVowelIndex = indexOfFirstVowel(userInput);
+			System.out.println(firstVowelIndex);
+			
+			
+			
+			System.out.printf("%s%s%s%n", userInput.substring(firstVowelIndex),
+					userInput.substring(0, firstVowelIndex), AY);
+			
+			System.out.print("Would you like to continue (y/n)?");
+			cont = scan.nextLine();
 
 		}
 
@@ -38,7 +47,7 @@ public class PigLatin {
 				return index;
 			}
 		}
-		return -1;
+		return 0;
 
 	}
 }
